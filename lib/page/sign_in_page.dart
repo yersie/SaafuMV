@@ -15,8 +15,11 @@ class _SignInScreenState extends State<SignInScreen> {
           Container(
             height: 300,
             decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover, image: AssetImage('asset/img/app.png'))),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('asset/img/app.png'),
+              ),
+            ),
           ),
           SizedBox(
             height: 20,
@@ -76,10 +79,10 @@ class _SignInScreenState extends State<SignInScreen> {
             height: 20,
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               Navigator.pushNamed(context, 'SignUp');
             },
-                      child: Center(
+            child: Center(
               child: RichText(
                 text: TextSpan(
                     text: 'Don\'t have an account? ',
