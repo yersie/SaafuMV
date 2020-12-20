@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../model/user.dart';
 import '../provider/data_provider.dart';
 import '../widget/rank_card.dart';
 
@@ -21,11 +20,7 @@ class LeaderboardTab extends StatelessWidget {
           ListView(
             shrinkWrap: true,
             children: [
-              ..._users
-                  .map(
-                    (user) => RankCard(user: user),
-                  )
-                  .toList(),
+              ..._users.map((user) => RankCard(user: user)).toList(),
             ],
           ),
         ],
