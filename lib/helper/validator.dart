@@ -8,6 +8,6 @@ class Validator {
   );
 
   static bool validateEmail(email) {
-    return emailRegExp.hasMatch(email);
+    return !emailRegExp.hasMatch(email);
   }
 }

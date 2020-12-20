@@ -21,7 +21,7 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Container(
         width: double.infinity,
         // height: 340.0,
@@ -64,19 +64,24 @@ class EventCard extends StatelessWidget {
                       event.authorName,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
-                    subtitle: Text(event.timeAgo),
+                    subtitle: Text(
+                      event.timeAgo,
+                      style: TextStyle(
+                        color: Colors.grey.shade300,
+                      ),
+                    ),
                     trailing: IconButton(
                       icon: Icon(Icons.more_horiz),
-                      color: Colors.black,
+                      color: Colors.white,
                       onPressed: () => print('More'),
                     ),
                   ),
                   InkWell(
                     onDoubleTap: () => print('Like post'),
                     child: Container(
-                      // margin: EdgeInsets.all(10.0),
                       width: double.infinity,
                       height: 240.0,
                       decoration: BoxDecoration(
@@ -99,15 +104,15 @@ class EventCard extends StatelessWidget {
                               children: <Widget>[
                                 IconButton(
                                   icon: Icon(Icons.favorite_border),
-                                  iconSize: 30.0,
+                                  iconSize: 32.0,
+                                  color: Colors.white,
                                   onPressed: () => print('Like post'),
                                 ),
                                 Text(
                                   '2,515',
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                  style: Theme.of(context)
+                                      .accentTextTheme
+                                      .subtitle1,
                                 ),
                               ],
                             ),

@@ -18,6 +18,7 @@ class Auth with ChangeNotifier {
       email: email,
     );
     notifyListeners();
+    print('Username: ' + _user.username);
   }
 
   void signIn(username, email) {

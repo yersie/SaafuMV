@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/auth_provider.dart';
 
 class SignInPage extends StatefulWidget {
   static const ROUTE = '/sign_in';
@@ -7,9 +10,13 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  final _form = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    final auth = Provider.of<Auth>(context);
     return Scaffold(
+      key: _form,
       backgroundColor: Colors.white,
       body: Form(
         child: ListView(
@@ -32,11 +39,13 @@ class _SignInPageState extends State<SignInPage> {
                 children: <Widget>[
                   IconButton(icon: Icon(Icons.person), onPressed: null),
                   Expanded(
-                      child: Container(
-                          margin: EdgeInsets.only(right: 20, left: 10),
-                          child: TextField(
-                            decoration: InputDecoration(hintText: 'Username'),
-                          )))
+                    child: Container(
+                      margin: EdgeInsets.only(right: 20, left: 10),
+                      child: TextFormField(
+                        decoration: InputDecoration(hintText: 'Username'),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -46,11 +55,13 @@ class _SignInPageState extends State<SignInPage> {
                 children: <Widget>[
                   IconButton(icon: Icon(Icons.lock), onPressed: null),
                   Expanded(
-                      child: Container(
-                          margin: EdgeInsets.only(right: 20, left: 10),
-                          child: TextField(
-                            decoration: InputDecoration(hintText: 'Password'),
-                          ))),
+                    child: Container(
+                      margin: EdgeInsets.only(right: 20, left: 10),
+                      child: TextField(
+                        decoration: InputDecoration(hintText: 'Password'),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -64,7 +75,9 @@ class _SignInPageState extends State<SignInPage> {
                 child: Container(
                   height: 60,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      auth.signIn('', '');
+                    },
                     color: Color(0xFF5ba4cf),
                     child: Text(
                       'SIGN IN',
@@ -82,20 +95,23 @@ class _SignInPageState extends State<SignInPage> {
             ),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, 'SignUp');
+                // Navigator.pushNamed(context, 'SignUp');
               },
               child: Center(
                 child: RichText(
                   text: TextSpan(
-                      text: 'Don\'t have an account? ',
-                      style: TextStyle(color: Colors.black),
-                      children: [
-                        TextSpan(
-                          text: 'SIGN UP',
-                          style: TextStyle(
-                              color: Colors.teal, fontWeight: FontWeight.bold),
-                        )
-                      ]),
+                    text: 'Don\'t have an account? ',
+                    style: TextStyle(color: Colors.black),
+                    children: [
+                      TextSpan(
+                        text: 'SIGN UP',
+                        style: TextStyle(
+                          color: Colors.teal,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             )

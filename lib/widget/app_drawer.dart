@@ -8,7 +8,7 @@ class AppDrawer extends StatelessWidget {
         children: [
           Container(
             height: double.infinity,
-            color: Colors.teal.shade200,
+            color: Colors.teal.shade300,
             // decoration: BoxDecoration(
             //   image: DecorationImage(
             //     fit: BoxFit.cover,
@@ -20,7 +20,7 @@ class AppDrawer extends StatelessWidget {
               AppBar(
                 title: Text('SaafuMV'),
                 automaticallyImplyLeading: false,
-                backgroundColor: Colors.teal,
+                backgroundColor: Colors.teal.withOpacity(0.8),
                 elevation: 0,
               ),
               ListTile(

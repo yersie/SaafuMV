@@ -1,8 +1,8 @@
-import 'package:SaafuMV/helper/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../widget/custom_back_button.dart';
-import 'home_page.dart';
+import '../provider/auth_provider.dart';
+import '../helper/validator.dart';
 
 class SignUpPage extends StatefulWidget {
   static const ROUTE = '/sign_up';
@@ -23,7 +23,7 @@ class _SignUpPageState extends State<SignUpPage> {
   };
   bool areTermsAgreed = false;
 
-  bool _isLoading = false;
+  String _termsError = '';
 
   @override
   void dispose() {
@@ -33,10 +33,19 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _saveForm(BuildContext context) async {
-    _isLoading = true;
     final isValid = _form.currentState.validate();
-    if (isValid) {
-      Navigator.of(context).pushNamed(HomePage.ROUTE);
+    if (!areTermsAgreed) {
+      setState(() {
+        _termsError =
+            'Please check the box to agree with out terms and conditions to continue.';
+      });
+    }
+    if (isValid && areTermsAgreed) {
+      final auth = Provider.of<Auth>(context, listen: false);
+      auth.signUp(
+        _user['username'],
+        _user['password'],
+      );
     }
   }
 
@@ -48,7 +57,15 @@ class _SignUpPageState extends State<SignUpPage> {
         key: _form,
         child: ListView(
           children: <Widget>[
-            CustomBackButton(),
+            Container(
+              height: 200,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('asset/img/beach.png'),
+                ),
+              ),
+            ),
             SizedBox(
               height: 20,
             ),
@@ -61,7 +78,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Container(
                       margin: EdgeInsets.only(right: 20, left: 10),
                       child: TextFormField(
-                        decoration: InputDecoration(hintText: 'Username'),
+                        decoration: InputDecoration(
+                          hintText: 'Username',
+                        ),
                         textInputAction: TextInputAction.next,
                         onFieldSubmitted: (_) {
                           FocusScope.of(context).requestFocus(_passFocusNode);
@@ -145,7 +164,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   Checkbox(
                       value: areTermsAgreed,
                       onChanged: (value) {
-                        areTermsAgreed = !areTermsAgreed;
+                        setState(() {
+                          areTermsAgreed = !areTermsAgreed;
+                          if (areTermsAgreed && _termsError.isNotEmpty) {
+                            _termsError = '';
+                          }
+                        });
                       }),
                   RichText(
                     text: TextSpan(
@@ -165,8 +189,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 10,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                _termsError,
+                style: TextStyle(
+                  color: Theme.of(context).errorColor,
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(20.0),

@@ -15,8 +15,7 @@ class CustomBackButton extends StatelessWidget {
           image: AssetImage('asset/img/beach.png'),
         ),
       ),
-      child: Positioned(
-          child: Stack(
+      child: Stack(
         children: <Widget>[
           Positioned(
             top: 20,
@@ -56,7 +55,7 @@ class CustomBackButton extends StatelessWidget {
             ),
           )
         ],
-      )),
+      ),
     );
   }
 }

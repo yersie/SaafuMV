@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
 
-import '../provider/event_provider.dart';
 import '../widget/app_drawer.dart';
-import '../widget/bottom_nav.dart';
-import '../widget/event_card.dart';
+import '../tab/feed_tab.dart';
+import '../tab/profile_tab.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const ROUTE = '/home';
 
-  final events = Events().events;
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _widgetOptions = <Widget>[
+    FeedTab(),
+    Center(
+      child: Text('Map Page'),
+    ),
+    Center(
+      child: Text('Leaderboard Page'),
+    ),
+    ProfileTab(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +46,54 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Scaffold(
-            bottomNavigationBar: BottomNav(),
             backgroundColor: Colors.transparent,
-            drawer: AppDrawer(),
             appBar: AppBar(
-              backgroundColor: Colors.teal,
+              backgroundColor: Colors.teal.withOpacity(0.5),
               title: const Text('SaafuMV'),
             ),
-            body: ListView(
-              physics: AlwaysScrollableScrollPhysics(),
-              children: <Widget>[...events.map((e) => EventCard(e)).toList()],
+            drawer: AppDrawer(),
+            body: _widgetOptions.elementAt(_selectedIndex),
+            bottomNavigationBar: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30.0),
+                topRight: Radius.circular(30.0),
+              ),
+              child: BottomNavigationBar(
+                backgroundColor: Colors.teal.withOpacity(0.5),
+                selectedItemColor: Colors.tealAccent,
+                unselectedItemColor: Colors.white,
+                type: BottomNavigationBarType.fixed,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                currentIndex: _selectedIndex,
+                onTap: _onItemTapped,
+                items: [
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.dashboard,
+                    ),
+                    label: 'Feed',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.place,
+                    ),
+                    label: 'Map',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.local_fire_department,
+                    ),
+                    label: 'Leaderboard',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      Icons.assignment_ind,
+                    ),
+                    label: 'Profile',
+                  ),
+                ],
+              ),
             ),
           ),
         ],

@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import 'provider/auth_provider.dart';
 import 'page/home_page.dart';
-import 'page/sign_in_page.dart';
 import 'page/sign_up_page.dart';
 
 void main() {
@@ -29,15 +28,15 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.teal,
         ),
-        // home: Consumer<Auth>(
-        //   builder: (context, auth, child) =>
-        //       auth.user != null ? HomePage() : SignInPage(),
-        // ),
-        initialRoute: HomePage.ROUTE,
+        home: Consumer<Auth>(
+          builder: (context, auth, child) =>
+              auth.user != null ? HomePage() : SignUpPage(),
+        ),
+        // initialRoute: HomePage.ROUTE,
         routes: {
-          HomePage.ROUTE: (context) => HomePage(),
-          SignInPage.ROUTE: (context) => SignInPage(),
-          SignUpPage.ROUTE: (context) => SignUpPage(),
+          HomePage.ROUTE: (_) => HomePage(),
+          SignUpPage.ROUTE: (_) => SignUpPage(),
+          // SignInPage.ROUTE: (_) => SignInPage(),
         },
       ),
     );
