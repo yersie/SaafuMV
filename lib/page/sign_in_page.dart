@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SignInScreen extends StatefulWidget {
+class SignInPage extends StatefulWidget {
+  static final ROUTE = '/sign_in';
   @override
-  _SignInScreenState createState() => _SignInScreenState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
