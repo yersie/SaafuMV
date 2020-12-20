@@ -12,7 +12,7 @@ class CustomBackButton extends StatelessWidget {
       decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: AssetImage('asset/img/app.png'),
+          image: AssetImage('asset/img/beach.png'),
         ),
       ),
       child: Positioned(

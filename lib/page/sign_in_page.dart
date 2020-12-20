@@ -18,7 +18,7 @@ class _SignInPageState extends State<SignInPage> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('asset/img/app.png'),
+                image: AssetImage('asset/img/beach.png'),
               ),
             ),
           ),
