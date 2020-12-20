@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'provider/auth_provider.dart';
-
 import 'page/home_page.dart';
 import 'page/sign_in_page.dart';
 import 'page/sign_up_page.dart';
