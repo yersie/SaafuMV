@@ -20,8 +20,8 @@ class _ProfileTabState extends State<ProfileTab>
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           CircleAvatar(
-            backgroundImage: NetworkImage(
-              "https://media.vanityfair.com/photos/5dd70131e78810000883f587/4:3/w_1115,h_836,c_limit/baby-yoda-craze.jpg",
+            backgroundImage: AssetImage(
+              'asset/img/user_profile/4.jpg',
             ),
             radius: 50.0,
           ),
