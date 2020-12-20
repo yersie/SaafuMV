@@ -8,12 +8,11 @@ class AppDrawer extends StatelessWidget {
         children: [
           Container(
             height: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('asset/img/app_bg.png'),
-              ),
-            ),
+            color: Colors.teal.shade200,
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //     fit: BoxFit.cover,
+            //     image: AssetImage('asset/img/app_bg.png'),
           ),
           ListView(
             padding: EdgeInsets.zero,
@@ -21,7 +20,7 @@ class AppDrawer extends StatelessWidget {
               AppBar(
                 title: Text('SaafuMV'),
                 automaticallyImplyLeading: false,
-                backgroundColor: Colors.transparent,
+                backgroundColor: Colors.teal,
                 elevation: 0,
               ),
               ListTile(

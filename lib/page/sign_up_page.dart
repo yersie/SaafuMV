@@ -1,11 +1,11 @@
+import 'package:SaafuMV/helper/validator.dart';
 import 'package:flutter/material.dart';
 
-import '../dao/auth_dao.dart';
 import '../widget/custom_back_button.dart';
 import 'home_page.dart';
 
 class SignUpPage extends StatefulWidget {
-  static final ROUTE = '/sign_up';
+  static const ROUTE = '/sign_up';
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -21,6 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
     'password': '',
     'email': '',
   };
+  bool areTermsAgreed = false;
 
   bool _isLoading = false;
 
@@ -35,14 +36,8 @@ class _SignUpPageState extends State<SignUpPage> {
     _isLoading = true;
     final isValid = _form.currentState.validate();
     if (isValid) {
-      _form.currentState.save();
-      await AuthDao.instance.signUp(
-        _user['username'],
-        _user['email'],
-        _user['password'],
-      );
+      Navigator.of(context).pushNamed(HomePage.ROUTE);
     }
-    Navigator.of(context).pushNamed(HomePage.ROUTE);
   }
 
   @override
@@ -127,6 +122,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         validator: (email) {
                           if (email.isEmpty) {
                             return 'Please enter an email address.';
+                          } else if (Validator.validateEmail(email)) {
+                            return 'Please enter a valid email address.';
                           }
                           return null;
                         },
@@ -144,7 +141,12 @@ class _SignUpPageState extends State<SignUpPage> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: <Widget>[
-                  Radio(value: null, groupValue: null, onChanged: null),
+                  // Radio(value: null, groupValue: null, onChanged: null),
+                  Checkbox(
+                      value: areTermsAgreed,
+                      onChanged: (value) {
+                        areTermsAgreed = !areTermsAgreed;
+                      }),
                   RichText(
                     text: TextSpan(
                       text: 'I have accepted the',
