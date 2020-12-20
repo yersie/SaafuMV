@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widget/app_drawer.dart';
 import '../tab/feed_tab.dart';
+import '../tab/leaderboard_tab.dart';
 import '../tab/profile_tab.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,6 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String _appbar_title = 'SaafuMV';
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
@@ -19,15 +21,27 @@ class _HomePageState extends State<HomePage> {
     Center(
       child: Text('Map Page'),
     ),
-    Center(
-      child: Text('Leaderboard Page'),
-    ),
+    LeaderboardTab(),
     ProfileTab(),
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      switch (index) {
+        case 0:
+          _appbar_title = 'Timeline';
+          break;
+        case 1:
+          _appbar_title = 'Event Map';
+          break;
+        case 2:
+          _appbar_title = 'Ranking';
+          break;
+        case 3:
+          _appbar_title = 'Profile';
+          break;
+      }
     });
   }
 
@@ -49,7 +63,9 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.transparent,
             appBar: AppBar(
               backgroundColor: Colors.teal.withOpacity(0.5),
-              title: const Text('SaafuMV'),
+              title: Text(
+                _appbar_title,
+              ),
             ),
             drawer: AppDrawer(),
             body: _widgetOptions.elementAt(_selectedIndex),
@@ -70,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 items: [
                   BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.dashboard,
+                      Icons.timeline,
                     ),
                     label: 'Feed',
                   ),
@@ -82,13 +98,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.local_fire_department,
+                      Icons.leaderboard,
                     ),
-                    label: 'Leaderboard',
+                    label: 'Ranking',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(
-                      Icons.assignment_ind,
+                      Icons.person,
                     ),
                     label: 'Profile',
                   ),

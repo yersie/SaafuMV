@@ -28,11 +28,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.teal,
         ),
-        home: Consumer<Auth>(
-          builder: (context, auth, child) =>
-              auth.user != null ? HomePage() : SignUpPage(),
-        ),
-        // initialRoute: HomePage.ROUTE,
+        // home: Consumer<Auth>(
+        //   builder: (context, auth, child) =>
+        //       auth.user != null ? HomePage() : SignUpPage(),
+        // ),
+        initialRoute: HomePage.ROUTE,
         routes: {
           HomePage.ROUTE: (_) => HomePage(),
           SignUpPage.ROUTE: (_) => SignUpPage(),

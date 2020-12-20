@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../provider/event_provider.dart';
+import '../provider/data_provider.dart';
 import '../widget/event_card.dart';
 
 class FeedTab extends StatelessWidget {
-  final events = Events().events;
+  final events = Data.events;
 
   @override
   Widget build(BuildContext context) {
