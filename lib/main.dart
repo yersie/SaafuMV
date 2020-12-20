@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Sign Up Screen ',
+        title: 'Sign Up',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.teal,
@@ -32,11 +32,9 @@ class MyApp extends StatelessWidget {
           builder: (context, auth, child) =>
               auth.user != null ? HomePage() : SignUpPage(),
         ),
-        // initialRoute: HomePage.ROUTE,
         routes: {
           HomePage.ROUTE: (_) => HomePage(),
           SignUpPage.ROUTE: (_) => SignUpPage(),
-          // SignInPage.ROUTE: (_) => SignInPage(),
         },
       ),
     );

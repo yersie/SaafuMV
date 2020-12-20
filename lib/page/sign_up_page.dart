@@ -37,7 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
     if (!areTermsAgreed) {
       setState(() {
         _termsError =
-            'Please check the box to agree with out terms and conditions to continue.';
+            'Please check the checkbox to indicate that you have read and agree to the Terms and Conditions';
       });
     }
     if (isValid && areTermsAgreed) {
@@ -189,15 +189,16 @@ class _SignUpPageState extends State<SignUpPage> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                _termsError,
-                style: TextStyle(
-                  color: Theme.of(context).errorColor,
+            if (_termsError.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  _termsError,
+                  style: TextStyle(
+                    color: Theme.of(context).errorColor,
+                  ),
                 ),
               ),
-            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: ClipRRect(
